@@ -1,0 +1,17 @@
+# Visual Studio Code / Dev Container specific settings
+.vscode/
+*.code-workspace
+
+# macOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
+
+# Common editor backup files
+*~
+*.swp
+*.swo
+
+# Log files
+*.log

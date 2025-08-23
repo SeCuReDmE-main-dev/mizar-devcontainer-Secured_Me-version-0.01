@@ -1,0 +1,14 @@
+{
+	"name": "Mizar Formal Verification Environment",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+	"postCreateCommand": "bash ./.devcontainer/install-mizar.sh && pip install -r requirements.txt",
+	"forwardPorts": [8080],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Mizar-Project.mizar-vscode"
+			]
+		}
+	},
+	"remoteUser": "root"
+}

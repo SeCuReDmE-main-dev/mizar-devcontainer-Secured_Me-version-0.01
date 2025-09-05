@@ -1,10 +1,9 @@
 {
   "name": "Mizar Formal Verification API",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
 
   // This command runs AFTER the container is created.
-  // We will use it to install Python, Flask, and other tools.
-  "postCreateCommand": "apt-get update && apt-get install -y python3 python3-pip && pip3 install flask",
+  "postCreateCommand": "pip3 install -r requirements.txt && pip3 install -r requirements-dev.txt",
 
   // We are forwarding port 5000 because our new app.py uses it.
   "forwardPorts": [5000],
@@ -13,10 +12,18 @@
     "vscode": {
       // These are REAL extensions from the marketplace that will help us.
       "extensions": [
-        "ms-python.python" // The official Python extension for VS Code
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "ms-python.debugpy"
       ]
     }
   },
+
+  // Mount workspace with correct permissions
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/workspace",
 
   // Running as root is fine for this development container.
   "remoteUser": "root"

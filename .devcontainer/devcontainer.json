@@ -1,14 +1,23 @@
 {
-	"name": "Mizar Formal Verification Environment",
-	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-	"postCreateCommand": "bash ./.devcontainer/install-mizar.sh && pip install -r requirements.txt",
-	"forwardPorts": [8080],
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"Mizar-Project.mizar-vscode"
-			]
-		}
-	},
-	"remoteUser": "root"
+  "name": "Mizar Formal Verification API",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+  // This command runs AFTER the container is created.
+  // We will use it to install Python, Flask, and other tools.
+  "postCreateCommand": "apt-get update && apt-get install -y python3 python3-pip && pip3 install flask",
+
+  // We are forwarding port 5000 because our new app.py uses it.
+  "forwardPorts": [5000],
+
+  "customizations": {
+    "vscode": {
+      // These are REAL extensions from the marketplace that will help us.
+      "extensions": [
+        "ms-python.python" // The official Python extension for VS Code
+      ]
+    }
+  },
+
+  // Running as root is fine for this development container.
+  "remoteUser": "root"
 }

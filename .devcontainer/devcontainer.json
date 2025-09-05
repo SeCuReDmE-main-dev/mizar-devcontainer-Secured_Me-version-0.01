@@ -22,9 +22,12 @@
   },
 
   // Mount workspace with correct permissions
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
-  "workspaceFolder": "/workspace",
+  "workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
+  // Additional Docker run options
+  "runArgs": ["--init"],
+  
   // Running as root is fine for this development container.
   "remoteUser": "root"
 }

@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
 
   // This command runs AFTER the container is created.
-  "postCreateCommand": "pip3 install -r requirements.txt && pip3 install -r requirements-dev.txt",
+  "postCreateCommand": "bash .devcontainer/install-mizar.sh && pip3 install -r requirements.txt && pip3 install -r requirements-dev.txt",
 
   // We are forwarding port 5000 because our new app.py uses it.
   "forwardPorts": [5000],

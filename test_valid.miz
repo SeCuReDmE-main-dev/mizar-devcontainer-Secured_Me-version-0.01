@@ -1,0 +1,12 @@
+environ
+
+vocabularies SUBSET_1, TARSKI;
+notations SUBSET_1, TARSKI;
+constructors TARSKI;
+
+begin
+
+theorem Th1: 1 = 1
+proof
+  thus 1 = 1;
+end;

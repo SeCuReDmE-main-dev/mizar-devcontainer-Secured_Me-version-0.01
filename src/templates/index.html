@@ -78,7 +78,18 @@
             });
 
             const data = await response.json();
-            outputElement.textContent = data.result;
+            if (data.status === 'success') {
+                outputElement.textContent = `✅ Verification Successful!\n\n${data.raw_output}`;
+            } else if (data.status === 'failure') {
+                let errorDisplay = `❌ Verification Failed\n\nErrors Found:\n`;
+                data.errors.forEach(error => {
+                    errorDisplay += `• Line ${error.line}, Column ${error.character}: ${error.message}\n`;
+                });
+                errorDisplay += `\nFull Output:\n${data.raw_output}`;
+                outputElement.textContent = errorDisplay;
+            } else {
+                outputElement.textContent = `⚠️ Error: ${data.message}`;
+            }
         }
     </script>
 </body>

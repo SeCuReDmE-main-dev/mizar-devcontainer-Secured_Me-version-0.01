@@ -28,15 +28,25 @@ def verify_mizar():
         temp_filename = temp_file.name
 
     try:
-        # We run the Mizar verifier command from the dev container
-        # IMPORTANT: The original code used 'mizf'. The devcontainer uses '/mizar/verifymain'.
-        # Let's stick to the devcontainer's command to be safe.
-        process = subprocess.run(
-            ['/mizar/verifymain', temp_filename],
-            capture_output=True,
-            text=True,
-            timeout=30
-        )
+        # Try different Mizar commands based on what's available
+        mizar_commands = ['mizf', '/mizar/verifymain', '/usr/local/bin/mizf']
+        process = None
+        
+        for cmd in mizar_commands:
+            try:
+                process = subprocess.run(
+                    [cmd, temp_filename],
+                    capture_output=True,
+                    text=True,
+                    timeout=30
+                )
+                break
+            except FileNotFoundError:
+                continue
+        
+        if process is None:
+            return jsonify({"status": "error", "message": "Mizar verifier not found. Please ensure Mizar is installed."}), 500
+            
         output = process.stdout + process.stderr
 
         # --- CHANGE 2: We parse the output and create a structured JSON response ---
